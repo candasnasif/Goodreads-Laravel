@@ -90,8 +90,8 @@
                 <form  method="POST" action="{{ url('/main/updateBookDate')}}">
                     {{ csrf_field() }}
                     <input   type="text" value="{{$book -> ISBN}}" name="ISBN" hidden/>
-                    <td>{{ $book->dateStarted }}<input class="readDate{{$book->ISBN}}" type="date"  name="dateStarted" hidden/></td>
-                    <td>{{ $book->dateFinished }}<input class="readDate{{$book->ISBN}}" type="date" name="dateFinished" hidden/></td>
+                    <td>{{ $book->dateStarted }}<input class="readDate{{$book->ISBN}}" type="date" value="{{ $book->dateStarted }}" name="dateStarted" hidden/></td>
+                    <td>{{ $book->dateFinished }}<input class="readDate{{$book->ISBN}}" type="date" value="{{ $book->dateFinished }}" name="dateFinished" hidden/></td>
                 <td ><button id="editButton{{$book->ISBN}}" type="button" ><span class="glyphicon glyphicon-edit"></span></button></td>
                 <td ><button id="okButton{{$book->ISBN}}" type="submit"  hidden><span class="glyphicon glyphicon-ok"></span></button></td>
                 </form>

@@ -47,7 +47,7 @@
                     <form  method="POST" action="{{ url('/main/updatePrintingHouse')}}">
                     {{ csrf_field() }}
                     <td>{{ $printinghouse->PHouseName }}<input class="printingHouseID" value="{{$printinghouse->PHouseID}}"type="text"  name="printingHouseID" hidden/></td>
-                    <td>{{ $printinghouse->Address }}<input class="{{$i}}" type="text"  name="editAddress" hidden/></td>
+                    <td>{{ $printinghouse->Address }}<input class="{{$i}}" type="text" value="{{ $printinghouse->Address }}" name="editAddress" hidden/></td>
                     <td ><button id="editButton{{$i}}" type="button" ><span class="glyphicon glyphicon-edit"></span></button></td>
                     <td ><button id="okButton{{$i}}" type="submit"  hidden><span class="glyphicon glyphicon-ok"></span></button></td>
                     <td ><a href="{{action('MainController@deletePrintingHouse', ['PHouseID' =>$printinghouse -> PHouseID])}}"><span class="glyphicon glyphicon-trash"></span></a></td>

@@ -457,6 +457,24 @@ class MainController extends Controller
         }
     }
 
+    function updatePublisher(Request $request) {
+        try {
+            $editName = $request->get('editName');
+            $editFounder = $request->get('editFounder');
+            $editOrigin = $request->get('editOrigin');
+            $editDateFounded = $request->get('editDateFounded');
+            $publisherID = $request->get('publisherID');
+            DB::table('publisher') 
+                ->where('publisherID', $publisherID)
+                ->update(['publisherName' => $editName, 'founder'=> $editFounder, 'origin'=> $editOrigin, 'dateFounded'=>$editDateFounded]);
+            toastr()->success('Transaction completed successfully!');
+            return redirect('/main/publisher');
+        } catch(\Illuminate\Database\QueryException $ex){ 
+            toastr()->error('Book couldn"t be updated!');
+            return redirect('/main/publisher');
+        }
+    }
+
     function logout() {
         Auth::logout();
         return redirect('main');

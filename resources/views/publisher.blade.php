@@ -9,6 +9,9 @@
         <link href="{{ asset('css/homePage.css') }}" rel="stylesheet">
     </head>
     <body>
+    @toastr_css
+    @toastr_js
+    @toastr_render
     <div class="topnav">
         <a href="{{action('MainController@homePage')}}">Discussion</a>
         <a href="{{ url('/main/quotes') }}">Quotes</a>
@@ -37,12 +40,28 @@
             <tbody>
             @php ($i=1)
             @foreach ($publishers as $publisher)
+            <script>
+                $(document).ready(function(){
+                    $("#editButton{{$i}}").click(function() {
+                        $(".{{$i}}").show();
+                        $("#okButton{{$i}}").show();
+                    });
+                });
+                </script>
             <tr>
-                <th scope="row">{{$i}}</th>
-                <td>{{ $publisher->publisherName }}</td>
-                <td>{{ $publisher->founder }}</td>
-                <td>{{ $publisher->origin }}</td>
-                <td>{{ $publisher->dateFounded }}</td>
+                <form  method="POST" action="{{ url('/main/updatePublisher')}}">
+                    {{ csrf_field() }}
+
+                    <th scope="row">{{$i}}</th>
+                    <td>{{ $publisher->publisherName }}<input class="{{$i}}" value="{{ $publisher->publisherName }}" type="text"  name="editName" hidden/></td>
+                    <td>{{ $publisher->founder }}<input class="{{$i}}" type="text" value="{{ $publisher->founder }}"  name="editFounder" hidden/></td>
+                    <td>{{ $publisher->origin }}<input class="{{$i}}" type="text" value="{{ $publisher->origin }}" name="editOrigin" hidden/></td>
+                    <td>{{ $publisher->dateFounded }}<input class="{{$i}}" type="text" value="{{ $publisher->dateFounded }}"  name="editDateFounded" hidden/></td>
+                    <input class="publisherID" name="publisherID" value="{{ $publisher->publisherID }}" hidden/>
+                    <td ><button id="editButton{{$i}}" type="button" ><span class="glyphicon glyphicon-edit"></span></button></td>
+                    <td ><button id="okButton{{$i}}" type="submit"  hidden><span class="glyphicon glyphicon-ok"></span></button></td>
+                </form>
+                
             </tr>
             @php ($i= $i + 1)
             @endforeach

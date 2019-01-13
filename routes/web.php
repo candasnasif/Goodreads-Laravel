@@ -48,3 +48,4 @@ Route::get('main/deleteStore', 'MainController@deleteStore');
 Route::post('main/updateStore', 'MainController@updateStore');
 Route::get('main/deletePrintingHouse', 'MainController@deletePrintingHouse');
 Route::post('main/updatePrintingHouse', 'MainController@updatePrintingHouse');
+Route::post('main/updatePublisher', 'MainController@updatePublisher');
